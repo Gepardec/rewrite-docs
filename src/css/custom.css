@@ -5,16 +5,15 @@
  */
 
 @font-face {
-    font-family: 'Beausite';
-    src: url('https://cdn.prod.website-files.com/664e62fe66f5b31edc6c3aeb/664e7a833d9ad9fa2febd048_BeausiteSlickWeb-Light.woff2') format('woff2'), url('https://cdn.prod.website-files.com/664e62fe66f5b31edc6c3aeb/664e7a830c62d5d188a8f45a_BeausiteSlickWeb-Light.woff') format('woff');
+    font-family: "Barlow Condensed Italic', Arial, sans-serif";
     font-weight: 300;
-    font-style: normal;
+    font-style: italic;
     font-display: swap;
 }
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-background-color: #F8F8FF;
+  --ifm-background-color: #EBEBEB;
   --ifm-color-mint: #85FE99;
   --ifm-color-primary: #4169e1;
   --ifm-color-primary-dark: #2855dd;
@@ -46,7 +45,7 @@
   --ifm-breadcrumb-spacing: 0.875rem;
   --ifm-menu-color-background-hover: transparent;
   --ifm-menu-color-background-active: transparent;
-  --ifm-link-color: #283AF7;
+  --ifm-link-color: #0016d1;
   --ifm-link-hover-color: var(--ifm-color-content);
   --ifm-menu-color: rgba(4, 24, 52);
   --ifm-menu-color-active: var(--ifm-link-color);
@@ -69,7 +68,7 @@ html[data-theme=light] {
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 html[data-theme='dark'] {
-  --ifm-background-color: #041834;
+  --ifm-background-color: #17181a;
   --ifm-color-primary: #7e9bd2;
   --ifm-color-primary-dark: #6588c9;
   --ifm-color-primary-darker: #597ec5;
@@ -81,7 +80,7 @@ html[data-theme='dark'] {
   --ifm-color-base: #fff;
   --ifm-heading-color: #fff;
   --ifm-menu-color: #fff;
-  --ifm-link-color: #85fe99;
+  --ifm-link-color: #ffc800;
   --ifm-toc-border-color: transparent;
   --ifm-section-divider-color: #d9d9d9;
   --ifm-card-background-color: #fff;
@@ -92,7 +91,9 @@ html[data-theme='dark'] {
 }
 
 .navbar__logo img {
-  height: 33px;
+  position: relative;
+  top: -40px;
+  height: 100px;
 }
 
 figure img {
@@ -205,7 +206,7 @@ html[data-theme=dark] [class^=docMainContainer_] .breadcrumbs__link:hover {
 
 [class^=docMainContainer_] h1 {
   --ifm-heading-font-weight: 300;
-  --ifm-heading-font-family: "Beausite", sans-serif;
+  --ifm-heading-font-family: "Barlow Condensed Italic", Arial, sans-serif;
   --ifm-h1-font-size: 3.75rem;
   --ifm-leading: 1;
 
