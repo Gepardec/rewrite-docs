@@ -71,7 +71,7 @@ const config: Config = {
     favicon: "img/favicon.ico",
 
     url: "https://docs.openrewrite.org",
-    baseUrl: "/",
+    baseUrl: "/rewrite-docs/",
 
     organizationName: "openrewrite",
     projectName: "rewrite-docs",
