@@ -1,8 +1,12 @@
 # Java
 
+## Categories
+
+* [Migrate](/recipes/java/migrate)
+
 ## Recipes
 
-* [Test](./test.md)
-* [Test2](./test2.md)
+* [Add annotation to class](./addannotationwithoutargumentstoclass.md)
+* [FindClassByPackageAndName](./findclassbypackageandname.md)
 
 

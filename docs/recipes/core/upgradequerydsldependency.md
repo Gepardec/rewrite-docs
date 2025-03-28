@@ -1,27 +1,32 @@
 ---
-sidebar_label: "Test2"
+sidebar_label: "Upgrade Maven dependency version example"
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Test2
+# Upgrade Maven dependency version example
 
-**com.gepardec.java.test2**
+**com.gepardec.UpgradeQueryDslDependency**
 
-_This is the second Test Recipe_
-
-### Tags
-
-* oss
 
 
 ## Definition
 
 <Tabs groupId="recipeType">
 <TabItem value="recipe-list" label="Recipe List" >
-* [Add license header](../java/addlicenseheader)
-  * licenseText: `Copyright 2023 the original author or authors. < p > Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at < p > https://www.apache.org/licenses/LICENSE-2.0 < p > Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.`
+* [Change Maven managed dependency groupId, artifactId and optionally the version](../maven/changemanageddependencygroupidandartifactid)
+  * oldGroupId: `com.mysema.querydsl`
+  * oldArtifactId: `querydsl-core`
+  * newGroupId: `com.querydsl`
+  * newArtifactId: `querydsl-core`
+* [Change Maven project property value](../maven/changepropertyvalue)
+  * key: `querydsl-core.version`
+  * newValue: `5.1.0`
+* [Change Maven dependency](../maven/changedependencygroupidandartifactid)
+  * oldGroupId: `com.mysema.querydsl`
+  * oldArtifactId: `querydsl-core`
+  * newGroupId: `com.querydsl`
 
 </TabItem>
 
@@ -30,27 +35,23 @@ _This is the second Test Recipe_
 ```yaml
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.gepardec.java.test2
-displayName: Test2
+name: com.gepardec.UpgradeQueryDslDependency
+displayName: Upgrade Maven dependency version example
 description: |
-  This is the second Test Recipe
-tags:
-  - oss
+  
 recipeList:
-  - org.openrewrite.java.AddLicenseHeader:
-      licenseText: Copyright 2023 the original author or authors.
-<p>
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-<p>
-https://www.apache.org/licenses/LICENSE-2.0
-<p>
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+  - org.openrewrite.maven.ChangeManagedDependencyGroupIdAndArtifactId:
+      oldGroupId: com.mysema.querydsl
+      oldArtifactId: querydsl-core
+      newGroupId: com.querydsl
+      newArtifactId: querydsl-core
+  - org.openrewrite.maven.ChangePropertyValue:
+      key: querydsl-core.version
+      newValue: 5.1.0
+  - org.openrewrite.maven.ChangeDependencyGroupIdAndArtifactId:
+      oldGroupId: com.mysema.querydsl
+      oldArtifactId: querydsl-core
+      newGroupId: com.querydsl
 
 ```
 </TabItem>
@@ -58,7 +59,7 @@ limitations under the License.
 
 ## Usage
 
-This recipe has no required configuration options. It can be activated by adding a dependency on `com.gepardec.openrewrite:OpenRewrite-Collection` in your build file or by running a shell command (in which case no build changes are needed):
+This recipe has no required configuration options. It can be activated by adding a dependency on `com.gepardec:write-open-rewrite` in your build file or by running a shell command (in which case no build changes are needed):
 <Tabs groupId="projectType">
 <TabItem value="gradle" label="Gradle">
 
@@ -70,7 +71,7 @@ plugins {
 }
 
 rewrite {
-    activeRecipe("com.gepardec.java.test2")
+    activeRecipe("com.gepardec.UpgradeQueryDslDependency")
     setExportDatatables(true)
 }
 
@@ -79,7 +80,7 @@ repositories {
 }
 
 dependencies {
-    rewrite("com.gepardec.openrewrite:OpenRewrite-Collection:{{VERSION_COM_GEPARDEC_OPENREWRITE_OPENREWRITE_COLLECTION}}")
+    rewrite("com.gepardec:write-open-rewrite:{{VERSION_COM_GEPARDEC_WRITE_OPEN_REWRITE}}")
 }
 ```
 
@@ -100,10 +101,10 @@ initscript {
 rootProject {
     plugins.apply(org.openrewrite.gradle.RewritePlugin)
     dependencies {
-        rewrite("com.gepardec.openrewrite:OpenRewrite-Collection:{{VERSION_COM_GEPARDEC_OPENREWRITE_OPENREWRITE_COLLECTION}}")
+        rewrite("com.gepardec:write-open-rewrite:{{VERSION_COM_GEPARDEC_WRITE_OPEN_REWRITE}}")
     }
     rewrite {
-        activeRecipe("com.gepardec.java.test2")
+        activeRecipe("com.gepardec.UpgradeQueryDslDependency")
         setExportDatatables(true)
     }
     afterEvaluate {
@@ -138,14 +139,14 @@ gradle --init-script init.gradle rewriteRun
         <configuration>
           <exportDatatables>true</exportDatatables>
           <activeRecipes>
-            <recipe>com.gepardec.java.test2</recipe>
+            <recipe>com.gepardec.UpgradeQueryDslDependency</recipe>
           </activeRecipes>
         </configuration>
         <dependencies>
           <dependency>
-            <groupId>com.gepardec.openrewrite</groupId>
-            <artifactId>OpenRewrite-Collection</artifactId>
-            <version>{{VERSION_COM_GEPARDEC_OPENREWRITE_OPENREWRITE_COLLECTION}}</version>
+            <groupId>com.gepardec</groupId>
+            <artifactId>write-open-rewrite</artifactId>
+            <version>{{VERSION_COM_GEPARDEC_WRITE_OPEN_REWRITE}}</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -161,7 +162,7 @@ gradle --init-script init.gradle rewriteRun
 You will need to have [Maven](https://maven.apache.org/download.cgi) installed on your machine before you can run the following command.
 
 ```shell title="shell"
-mvn -U org.openrewrite.maven:rewrite-maven-plugin:run -Drewrite.recipeArtifactCoordinates=com.gepardec.openrewrite:OpenRewrite-Collection:RELEASE -Drewrite.activeRecipes=com.gepardec.java.test2 -Drewrite.exportDatatables=true
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run -Drewrite.recipeArtifactCoordinates=com.gepardec:write-open-rewrite:RELEASE -Drewrite.activeRecipes=com.gepardec.UpgradeQueryDslDependency -Drewrite.exportDatatables=true
 ```
 </TabItem>
 <TabItem value="moderne-cli" label="Moderne CLI">
@@ -169,12 +170,12 @@ mvn -U org.openrewrite.maven:rewrite-maven-plugin:run -Drewrite.recipeArtifactCo
 You will need to have configured the [Moderne CLI](https://docs.moderne.io/user-documentation/moderne-cli/getting-started/cli-intro) on your machine before you can run the following command.
 
 ```shell title="shell"
-mod run . --recipe test2
+mod run . --recipe UpgradeQueryDslDependency
 ```
 
 If the recipe is not available locally, then you can install it using:
 ```shell
-mod config recipes jar install com.gepardec.openrewrite:OpenRewrite-Collection:{{VERSION_COM_GEPARDEC_OPENREWRITE_OPENREWRITE_COLLECTION}}
+mod config recipes jar install com.gepardec:write-open-rewrite:{{VERSION_COM_GEPARDEC_WRITE_OPEN_REWRITE}}
 ```
 </TabItem>
 </Tabs>

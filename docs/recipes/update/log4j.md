@@ -1,50 +1,20 @@
 ---
-sidebar_label: "Test"
+sidebar_label: "Upgrade Log4j dependency version"
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Test
+# Upgrade Log4j dependency version
 
-**com.gepardec.java.test**
+**com.gepardec.update.Log4j**
 
-_This is a Test Recipe_
+_Upgrades the Log4j dependency to the latest release version_
 
-### Tags
-
-* jakarta
-
-
-## Definition
-
-<Tabs groupId="recipeType">
-<TabItem value="recipe-list" label="Recipe List" >
-* [Test2](../java/test2)
-
-</TabItem>
-
-<TabItem value="yaml-recipe-list" label="Yaml Recipe List">
-
-```yaml
----
-type: specs.openrewrite.org/v1beta/recipe
-name: com.gepardec.java.test
-displayName: Test
-description: |
-  This is a Test Recipe
-tags:
-  - jakarta
-recipeList:
-  - com.gepardec.java.test2
-
-```
-</TabItem>
-</Tabs>
 
 ## Usage
 
-This recipe has no required configuration options. It can be activated by adding a dependency on `com.gepardec.openrewrite:OpenRewrite-Collection` in your build file or by running a shell command (in which case no build changes are needed):
+This recipe has no required configuration options. It can be activated by adding a dependency on `com.gepardec:write-open-rewrite` in your build file or by running a shell command (in which case no build changes are needed):
 <Tabs groupId="projectType">
 <TabItem value="gradle" label="Gradle">
 
@@ -56,7 +26,7 @@ plugins {
 }
 
 rewrite {
-    activeRecipe("com.gepardec.java.test")
+    activeRecipe("com.gepardec.update.Log4j")
     setExportDatatables(true)
 }
 
@@ -65,7 +35,7 @@ repositories {
 }
 
 dependencies {
-    rewrite("com.gepardec.openrewrite:OpenRewrite-Collection:{{VERSION_COM_GEPARDEC_OPENREWRITE_OPENREWRITE_COLLECTION}}")
+    rewrite("com.gepardec:write-open-rewrite:{{VERSION_COM_GEPARDEC_WRITE_OPEN_REWRITE}}")
 }
 ```
 
@@ -86,10 +56,10 @@ initscript {
 rootProject {
     plugins.apply(org.openrewrite.gradle.RewritePlugin)
     dependencies {
-        rewrite("com.gepardec.openrewrite:OpenRewrite-Collection:{{VERSION_COM_GEPARDEC_OPENREWRITE_OPENREWRITE_COLLECTION}}")
+        rewrite("com.gepardec:write-open-rewrite:{{VERSION_COM_GEPARDEC_WRITE_OPEN_REWRITE}}")
     }
     rewrite {
-        activeRecipe("com.gepardec.java.test")
+        activeRecipe("com.gepardec.update.Log4j")
         setExportDatatables(true)
     }
     afterEvaluate {
@@ -124,14 +94,14 @@ gradle --init-script init.gradle rewriteRun
         <configuration>
           <exportDatatables>true</exportDatatables>
           <activeRecipes>
-            <recipe>com.gepardec.java.test</recipe>
+            <recipe>com.gepardec.update.Log4j</recipe>
           </activeRecipes>
         </configuration>
         <dependencies>
           <dependency>
-            <groupId>com.gepardec.openrewrite</groupId>
-            <artifactId>OpenRewrite-Collection</artifactId>
-            <version>{{VERSION_COM_GEPARDEC_OPENREWRITE_OPENREWRITE_COLLECTION}}</version>
+            <groupId>com.gepardec</groupId>
+            <artifactId>write-open-rewrite</artifactId>
+            <version>{{VERSION_COM_GEPARDEC_WRITE_OPEN_REWRITE}}</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -147,7 +117,7 @@ gradle --init-script init.gradle rewriteRun
 You will need to have [Maven](https://maven.apache.org/download.cgi) installed on your machine before you can run the following command.
 
 ```shell title="shell"
-mvn -U org.openrewrite.maven:rewrite-maven-plugin:run -Drewrite.recipeArtifactCoordinates=com.gepardec.openrewrite:OpenRewrite-Collection:RELEASE -Drewrite.activeRecipes=com.gepardec.java.test -Drewrite.exportDatatables=true
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run -Drewrite.recipeArtifactCoordinates=com.gepardec:write-open-rewrite:RELEASE -Drewrite.activeRecipes=com.gepardec.update.Log4j -Drewrite.exportDatatables=true
 ```
 </TabItem>
 <TabItem value="moderne-cli" label="Moderne CLI">
@@ -155,12 +125,12 @@ mvn -U org.openrewrite.maven:rewrite-maven-plugin:run -Drewrite.recipeArtifactCo
 You will need to have configured the [Moderne CLI](https://docs.moderne.io/user-documentation/moderne-cli/getting-started/cli-intro) on your machine before you can run the following command.
 
 ```shell title="shell"
-mod run . --recipe test
+mod run . --recipe Log4j
 ```
 
 If the recipe is not available locally, then you can install it using:
 ```shell
-mod config recipes jar install com.gepardec.openrewrite:OpenRewrite-Collection:{{VERSION_COM_GEPARDEC_OPENREWRITE_OPENREWRITE_COLLECTION}}
+mod config recipes jar install com.gepardec:write-open-rewrite:{{VERSION_COM_GEPARDEC_WRITE_OPEN_REWRITE}}
 ```
 </TabItem>
 </Tabs>
